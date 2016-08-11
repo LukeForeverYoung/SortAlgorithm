@@ -13,7 +13,8 @@ int main()
 	//BubbleSort(num, 20);
 	//InsertionSort(num, 20);
 	//MergeSort(num, 0, 19);
-	BucketSort(num, 20);
+	//BucketSort(num, 20);
+	RadixSort(num, 20);
 	print(num, 20);
 	system("pause");
     return 0;

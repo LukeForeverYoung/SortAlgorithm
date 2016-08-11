@@ -1,7 +1,9 @@
 #pragma once
-#include <stdio.h>
-#include <time.h>
+#include <cstdio>
+#include <ctime>
 #include <algorithm>
+#include <cmath>
+#include <cstring>
 using namespace std;
 //¸¨Öúº¯Êý
 void ini(int num[], int len)
@@ -98,4 +100,31 @@ void BucketSort(int num[], int len)
 	for (int i = 0;i < 10;i++)
 		for (int j = 1;j <= bucket[i][0];j++)
 			num[pos++] = bucket[i][j];
+}
+//»ùÊýÅÅÐò
+int GetBit(int num, int ord)
+{
+	while (ord--)
+		num /= 10;
+	return num % 10;
+}
+void RadixSort(int num[], int len)
+{
+	int MaxBit = 0;
+	for (int i = 0;i < len;i++)
+		MaxBit = (MaxBit < log10(num[i]) ? log10(num[i]):MaxBit);
+	int temp[10][100];
+	for(int i=0;i<2;i++)
+	{
+		memset(temp, 0, sizeof(temp));
+		for (int j = 0;j < len;j++)
+		{
+			int nowbit = GetBit(num[j], i);
+			temp[nowbit][++temp[nowbit][0]] = num[j];
+		}
+		int pos = 0;
+		for (int i = 0;i < 10;i++)
+			for (int j = 1;j <= temp[i][0];j++)
+				num[pos++] = temp[i][j];
+	}
 }
